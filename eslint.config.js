@@ -13,29 +13,13 @@ export default [
         rules: {
             '@typescript-eslint/naming-convention': [
                 'error',
-
-                // functions
                 {
                     selector: 'function',
                     format: ['camelCase'],
                 },
-
-                // variables
                 {
-                    selector: 'variable',
-                    format: ['camelCase', 'UPPER_CASE'],
-                },
-
-                // parameters
-                {
-                    selector: 'parameter',
+                    selector: 'method',
                     format: ['camelCase'],
-                },
-
-                // class names
-                {
-                    selector: 'typeLike',
-                    format: ['PascalCase'],
                 },
             ],
         },
