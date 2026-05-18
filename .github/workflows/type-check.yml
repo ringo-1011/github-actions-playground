@@ -1,0 +1,36 @@
+name: type-check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install validation dependencies
+        run: npm install
+
+      - name: Create Cocos tsconfig stub
+        run: |
+          mkdir -p temp
+          echo '{
+            "compilerOptions": {
+              "target": "ES6",
+              "module": "commonjs",
+              "moduleResolution": "node"
+            }
+          }' > temp/tsconfig.cocos.json
+
+      - name: Run TypeScript type check
+        run: npm run type-check

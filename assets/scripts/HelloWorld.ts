@@ -4,7 +4,7 @@ const { ccclass } = _decorator;
 @ccclass('HelloWorld')
 export class HelloWorld extends Component {
     start() {
-
+      
     }
 }
 
