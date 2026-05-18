@@ -9,6 +9,7 @@
       "node"
     ],
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true 
   },
   "include": [
     "./",
