@@ -1,5 +1,6 @@
 export interface ValidationContext {
   branchName: string;
+  prTitle: string;
 }
 
 export interface ValidationResult {

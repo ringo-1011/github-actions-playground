@@ -1,5 +1,5 @@
 import { ValidationResult, Validator } from '../core/types';
-import { BRANCH_REGEX } from '../rule';
+import { BRANCH_REGEX } from '../config/rule';
 
 export const branchNameValidator: Validator = {
   name: 'branch-name-validator',

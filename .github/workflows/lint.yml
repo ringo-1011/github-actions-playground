@@ -1,4 +1,4 @@
-name: Naming Convention Check
+name: lint code
 
 on:
   pull_request:

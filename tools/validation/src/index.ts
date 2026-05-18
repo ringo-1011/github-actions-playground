@@ -1,21 +1,39 @@
 import { branchNameValidator } from "./validator/branch-name-validator";
+import { prTitleValidator } from "./validator/pr-title-validator.ts";
+
 
 const branchName =
-  process.env.BRANCH_NAME || '';
+  (process.env.BRANCH_NAME || '').trim();
 
-const results =
-  branchNameValidator.validate({
+const prTitle =
+  (process.env.PR_TITLE || '').trim();
+
+const validators = [
+  branchNameValidator,
+  prTitleValidator,
+];
+
+let hasError = false;
+
+for (const validator of validators) {
+  const results = validator.validate({
     branchName,
+    prTitle,
   });
 
-if (results.length > 0) {
   for (const result of results) {
     console.error(`
+[${validator.name}]
 [${result.type.toUpperCase()}]
+
 ${result.message}
 `);
-  }
 
+    hasError = true;
+  }
+}
+
+if (hasError) {
   process.exit(1);
 }
 
