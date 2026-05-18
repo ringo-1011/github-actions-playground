@@ -19,7 +19,7 @@ jobs:
           node-version: 20
 
       - name: Install validation dependencies
-        run: cd tools/validation && npm install
+        run: npm install
 
       - name: Run TypeScript type check
-        run: cd tools/validation && npm run type-check
+        run: npm run type-check
