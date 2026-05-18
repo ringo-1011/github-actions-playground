@@ -1,5 +1,5 @@
-import { _decorator, Component, Node } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, Component } from 'cc';
+const { ccclass } = _decorator;
 
 @ccclass('HelloWorld')
 export class HelloWorld extends Component {
@@ -7,11 +7,8 @@ export class HelloWorld extends Component {
 
     }
 
-    update(deltaTime: number) {
-        
-    }
-
     WrongNameConvention() {
+        var a = "hello there";
         console.log("This method name does not follow the camelCase convention.");
     }
 }
