@@ -2,8 +2,9 @@ import fs from 'fs';
 import path from 'path';
 
 import { imageSize }
-from 'image-size';
+  from 'image-size';
 import { ValidationResult, Validator } from '../core/types';
+import { SNAKE_CASE_REGEX } from '../config/rule';
 
 const IMAGE_EXTENSIONS = [
   '.png',
@@ -49,7 +50,7 @@ export const textureValidator: Validator = {
   validate(): ValidationResult[] {
     const results: ValidationResult[] = [];
 
-    const files = walk('assets');
+    const files = walk('assets/textures');
 
     for (const file of files) {
       const ext =
@@ -57,6 +58,17 @@ export const textureValidator: Validator = {
 
       if (!IMAGE_EXTENSIONS.includes(ext)) {
         continue;
+      }
+
+      const fileName =
+        path.basename(file, ext);
+
+      if (!SNAKE_CASE_REGEX.test(fileName)) {
+        results.push({
+          type: 'error',
+          message:
+            `[INVALID_TEXTURE_NAME] ${file}`,
+        });
       }
 
       const buffer =
