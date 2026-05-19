@@ -37,6 +37,10 @@ jobs:
           echo "===== CHANGED FILES ====="
           echo "${{ steps.changed-files.outputs.files }}"
           echo "========================="
-
+    
       - name: Run ESLint
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         run: npm run lint

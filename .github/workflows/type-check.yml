@@ -50,4 +50,8 @@ jobs:
           }' > temp/tsconfig.cocos.json
 
       - name: Run TypeScript type check
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         run: npm run type-check
