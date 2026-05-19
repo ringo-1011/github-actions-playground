@@ -17,6 +17,7 @@ import {
 import {
   textureValidator,
 } from './validator/texture-validator';
+import { vietnameseValidator } from './validator/vietnamese-validator';
 
 const changedFiles =
   (process.env.CHANGED_FILES || '')
@@ -29,6 +30,7 @@ const validators: Validator[] = [
   prTitleValidator,
   textureValidator,
   metaValidator,
+  vietnameseValidator
 ];
 
 let hasError = false;
