@@ -1,6 +1,7 @@
 import { Validator }
 from './core/types';
 import { branchNameValidator } from './validator/branch-name-validator';
+import { metaValidator } from './validator/meta-validator';
 import { prTitleValidator } from './validator/pr-title-validator.ts';
 import { textureValidator } from './validator/texture-validator';
 
@@ -8,6 +9,7 @@ const validators: Validator[] = [
   branchNameValidator,
   prTitleValidator,
   textureValidator,
+  metaValidator,
 ];
 
 let hasError = false;
