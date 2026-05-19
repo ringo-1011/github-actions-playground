@@ -60,7 +60,7 @@ export const vietnameseValidator:
 
             // ignore tiny text
             if (
-                content.length < 20
+                content.length < 5
             ) {
                 continue;
             }
