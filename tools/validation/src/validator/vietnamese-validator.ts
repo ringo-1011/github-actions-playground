@@ -1,7 +1,8 @@
 import * as fs from 'fs';
 
-import { franc }
-    from 'franc-min';
+import {
+    franc,
+} from 'franc-min';
 
 import {
     ValidationContext,
@@ -30,28 +31,32 @@ export const vietnameseValidator:
             ValidationResult[] = [];
 
         for (const file of changedFiles) {
+
+            // only validate assets
             if (
                 !file.startsWith('assets/')
             ) {
                 continue;
             }
+
             const ext =
                 file.substring(
                     file.lastIndexOf('.'),
                 );
 
+            // ignore unsupported files
             if (
                 !TEXT_EXTENSIONS.includes(ext)
             ) {
                 continue;
             }
 
+            // ignore deleted files
             if (
                 !fs.existsSync(file)
             ) {
                 continue;
             }
-
 
             const content =
                 fs.readFileSync(
@@ -59,38 +64,35 @@ export const vietnameseValidator:
                     'utf8',
                 );
 
-            // ignore tiny text
-            if (
-                content.length < 20
-            ) {
-                continue;
-            }
+            const lines =
+                content.split('\n');
 
-            const language =
-                franc(content);
-console.log(`[vietnamese-validator] ${file}: detected language = ${language}`);
-            if (
-                language === 'vie'
-            ) {
-                const preview =
-                    content
-                        .replace(/\s+/g, ' ')
-                        .slice(0, 120);
+            for (const line of lines) {
 
-                results.push({
-                    type: 'error',
-                    message:
-                        `[VIETNAMESE_DETECTED]
+                const trimmed =
+                    line.trim();
 
-                            FILE:
-                            ${file}
+                // ignore short lines
+                if (
+                    trimmed.length < 10
+                ) {
+                    continue;
+                }
 
-                            LANGUAGE:
-                            ${language}
+                const language =
+                    franc(trimmed);
 
-                            PREVIEW:
-                            ${preview}`,
-                });
+                if (
+                    language === 'vie'
+                ) {
+                    results.push({
+                        type: 'error',
+                        message:
+                            `[VIETNAMESE_DETECTED] ${file}\n${trimmed}`,
+                    });
+
+                    break;
+                }
             }
         }
 
