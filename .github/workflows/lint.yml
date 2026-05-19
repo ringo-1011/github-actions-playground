@@ -40,7 +40,13 @@ jobs:
     
       - name: Run ESLint
         env:
-          BRANCH_NAME: ${{ github.head_ref }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
           CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
-        run: npm run lint
+        run: |
+          FILES=$(echo "$CHANGED_FILES" | grep '^assets/scripts/.*\.ts$' || true)
+
+          if [ -z "$FILES" ]; then
+            echo "No TS files changed"
+            exit 0
+          fi
+
+          npx eslint $FILES

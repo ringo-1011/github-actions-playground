@@ -8,7 +8,8 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
-    "lint": "eslint assets/scripts --ext .ts",
+    "lint-local": "eslint assets/scripts --ext .ts",
+    "lint": "eslint",
     "validate": "ts-node tools/validation/src/index.ts"
   },
   "devDependencies": {
