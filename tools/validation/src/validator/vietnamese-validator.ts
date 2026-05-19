@@ -71,10 +71,24 @@ export const vietnameseValidator:
             if (
                 language === 'vie'
             ) {
+                const preview =
+                    content
+                        .replace(/\s+/g, ' ')
+                        .slice(0, 120);
+
                 results.push({
                     type: 'error',
                     message:
-                        `[VIETNAMESE_DETECTED] ${file}`,
+                        `[VIETNAMESE_DETECTED]
+
+                            FILE:
+                            ${file}
+
+                            LANGUAGE:
+                            ${language}
+
+                            PREVIEW:
+                            ${preview}`,
                 });
             }
         }
