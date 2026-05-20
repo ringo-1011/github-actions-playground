@@ -6,6 +6,8 @@ export class HelloWorld extends Component {
 
     start() {
         console.log('Chào');
+        console.log('Vãi');
+        console.log('Xin Chao');
     }
 
 }

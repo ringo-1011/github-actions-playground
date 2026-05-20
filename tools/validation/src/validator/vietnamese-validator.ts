@@ -18,7 +18,7 @@ const TEXT_EXTENSIONS = [
     '.md',
 ];
 
-const MIN_TEXT_LENGTH = 5;
+const MIN_TEXT_LENGTH = 2;
 
 export const vietnameseValidator:
     Validator = {
