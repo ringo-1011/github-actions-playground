@@ -1,9 +1,7 @@
 import * as fs from 'fs';
 
-import {
-    franc,
-} from 'franc-min';
-
+const LanguageDetect =
+    require('langdetect');
 import {
     ValidationContext,
     ValidationResult,
@@ -18,7 +16,10 @@ const TEXT_EXTENSIONS = [
     '.md',
 ];
 
-const MIN_TEXT_LENGTH = 2;
+const MIN_TEXT_LENGTH = 5;
+
+const languageDetector =
+    new LanguageDetect();
 
 export const vietnameseValidator:
     Validator = {
@@ -87,15 +88,22 @@ export const vietnameseValidator:
                     continue;
                 }
 
+                const detected =
+                    languageDetector.detect(
+                        text,
+                        1,
+                    );
+
                 const language =
-                    franc(text);
+                    detected[0]?.[0];
 
                 console.log(
-                    `[${file}] Detected language: ${language} for text: ${text}`,
+                    `[${file}] ${language}: ${text}`,
                 );
 
                 if (
-                    language === 'vie'
+                    language ===
+                    'vietnamese'
                 ) {
                     results.push({
                         type: 'error',
