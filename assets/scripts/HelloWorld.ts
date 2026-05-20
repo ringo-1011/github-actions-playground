@@ -5,7 +5,7 @@ const { ccclass } = _decorator;
 export class HelloWorld extends Component {
 
     start() {
-        console.log('tieng han quoc khong bo dau');
+        console.log('đây là tiếng hàn quốc');
     }
 
 }
