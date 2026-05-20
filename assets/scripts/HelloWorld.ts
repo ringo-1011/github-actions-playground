@@ -6,6 +6,7 @@ export class HelloWorld extends Component {
 
     start() {
         console.log('day la tieng viet khong dau');
+        console.log('day la tieng viet khong dau');
     }
 
 }
