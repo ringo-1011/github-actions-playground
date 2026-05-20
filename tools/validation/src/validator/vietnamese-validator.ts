@@ -1,13 +1,16 @@
 import * as fs from 'fs';
 
-const languageDetector =
-    require('langdetect');
 
 import {
     ValidationContext,
     ValidationResult,
     Validator,
 } from '../core/types';
+const LanguageDetect =
+    require('languagedetect');
+
+const languageDetector =
+    new LanguageDetect();
 
 const TEXT_EXTENSIONS = [
     '.ts',
