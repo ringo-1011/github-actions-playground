@@ -18,9 +18,6 @@ const TEXT_EXTENSIONS = [
     '.md',
 ];
 
-const SPLIT_REGEX =
-    /[\s()[\]{};,+\-*/=<>!?:'"`]+/;
-
 const MIN_TEXT_LENGTH = 5;
 
 export const vietnameseValidator:
@@ -69,57 +66,44 @@ export const vietnameseValidator:
                     'utf8',
                 );
 
-            const lines =
-                content.split('\n');
+            // extract quoted strings
+            const matches =
+                content.match(
+                    /(['"`])((?:\\.|(?!\1).)*)\1/g,
+                ) || [];
 
-            for (const line of lines) {
+            for (const raw of matches) {
 
-                const trimmedLine =
-                    line.trim();
+                const text =
+                    raw
+                        .slice(1, -1)
+                        .trim();
 
+                // ignore short text
                 if (
-                    trimmedLine.length <
+                    text.length <
                     MIN_TEXT_LENGTH
                 ) {
                     continue;
                 }
 
-                const chunks =
-                    trimmedLine.split(
-                        SPLIT_REGEX,
-                    );
+                const language =
+                    franc(text);
 
-                for (const chunk of chunks) {
+                console.log(
+                    `[${file}] Detected language: ${language} for text: ${text}`,
+                );
 
-                    const text =
-                        chunk.trim();
+                if (
+                    language === 'vie'
+                ) {
+                    results.push({
+                        type: 'error',
+                        message:
+                            `[VIETNAMESE_DETECTED] ${file}\n${text}`,
+                    });
 
-                    // ignore short chunk
-                    if (
-                        text.length <
-                        MIN_TEXT_LENGTH
-                    ) {
-                        continue;
-                    }
-
-                    const language =
-                        franc(text);
-
-                    console.log(
-                        `[${file}] Detected language: ${language} for text: ${text}`,
-                    );
-
-                    if (
-                        language === 'vie'
-                    ) {
-                        results.push({
-                            type: 'error',
-                            message:
-                                `[VIETNAMESE_DETECTED] ${file}\n${text}`,
-                        });
-
-                        break;
-                    }
+                    break;
                 }
             }
         }
