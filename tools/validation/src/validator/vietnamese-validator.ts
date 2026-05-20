@@ -111,8 +111,6 @@ export const vietnameseValidator:
                         message:
                             `[VIETNAMESE_DETECTED] ${file}\n${text}`,
                     });
-
-                    break;
                 }
             }
         }
