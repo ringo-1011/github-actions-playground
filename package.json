@@ -22,8 +22,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "cld": "^2.10.1",
     "franc-min": "^6.2.0",
     "image-size": "^2.0.2",
-    "langdetect": "^0.2.1"
+    "languagedetect": "^2.0.0"
   }
 }
