@@ -1,7 +1,8 @@
 import * as fs from 'fs';
 
-const LanguageDetect =
+const languageDetector =
     require('langdetect');
+
 import {
     ValidationContext,
     ValidationResult,
@@ -17,9 +18,6 @@ const TEXT_EXTENSIONS = [
 ];
 
 const MIN_TEXT_LENGTH = 5;
-
-const languageDetector =
-    new LanguageDetect();
 
 export const vietnameseValidator:
     Validator = {
@@ -95,7 +93,7 @@ export const vietnameseValidator:
                     );
 
                 const language =
-                    detected[0]?.[0];
+                    detected?.[0]?.[0];
 
                 console.log(
                     `[${file}] ${language}: ${text}`,
